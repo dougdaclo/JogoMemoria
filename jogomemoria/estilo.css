@@ -1,0 +1,116 @@
+body {
+    background: rgb(215, 140, 238);
+    font: normal 15pt Arial;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 15px 0;
+}
+
+section {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    width: 500px;
+    height: auto;
+    max-width: 40%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.308);
+}
+
+footer {
+    color: white;
+    text-align: center;
+    font-style: bold;
+    padding: 15px 0;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 colunas */
+    grid-template-rows: repeat(4, 1fr); /* 4 linhas */
+    gap: 10px;
+    width: 100%;
+    margin: 0 auto;
+    justify-items: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Estilo para cada carta */
+.card {
+    width: 100px;
+    height: 120px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transform-style: preserve-3d; /* Necessário para a rotação das cartas */
+    transition: transform 0.5s; /* Efeito de transição para a rotação */
+}
+
+.card.flipped {
+    transform: rotateY(180deg); /* Efeito de virada */
+}
+
+/* Estilo para a parte de trás da carta */
+.card-back {
+    width: 100%;
+    height: 100%;
+    background-image: url('carta.png'); /* Caminho para a imagem de fundo */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 8px;
+    backface-visibility: hidden;
+}
+
+/* Estilo para a frente da carta */
+.card-front {
+    width: 100%;
+    height: 100%;
+    background-size: cover; /* Ajusta a imagem da frente */
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    transform: rotateY(180deg); /* Rotaciona a frente para que apareça na virada */
+}
+
+/* Efeito de embaralhamento no tabuleiro */
+@keyframes shuffleAnimation {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-10px) rotate(45deg);
+    }
+    50% {
+        transform: translateY(10px) rotate(90deg);
+    }
+    75% {
+        transform: translateY(-10px) rotate(135deg);
+    }
+    100% {
+        transform: translateY(0) rotate(180deg);
+    }
+}
+
+.shuffle-animation {
+    animation: shuffleAnimation 1s ease-in-out;
+}
+
+/* Quando uma carta está sendo embaralhada, ela vai "saltar" */
+.card.shuffling {
+    animation: shuffleAnimation 1s ease-in-out;
+}
